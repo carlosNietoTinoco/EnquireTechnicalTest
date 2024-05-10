@@ -1,0 +1,34 @@
+version: '1'
+services:
+
+  search-engine-postgres:
+    image: "postgres:15.4-alpine3.18"
+    container_name: search-engine-postgres
+    volumes:
+      - search-engine-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=search-engine_db
+      - POSTGRES_USER=search-engine_user
+      - POSTGRES_PASSWORD=search-engine_password
+      
+  search-engine-app:
+    build: ./search-engine-app
+    container_name: search-engine-app
+    environment:
+      - DB_SERVER=search-engine-postgres
+      - POSTGRES_DB=search-engine_db
+      - POSTGRES_USER=search-engine_user
+      - POSTGRES_PASSWORD=search-engine_password
+    ports:
+      - 56789:56789
+    depends_on:
+      - "search-engine-postgres"
+    links:
+      - search-engine-postgres
+
+
+
+volumes:
+  search-engine-data:
