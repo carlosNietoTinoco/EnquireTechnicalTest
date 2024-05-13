@@ -1,34 +1,33 @@
-version: '1'
+version: '3'
 services:
 
-  search-engine-postgres:
-    image: "postgres:15.4-alpine3.18"
-    container_name: search-engine-postgres
+  adn-postgres:
+    image: "postgres:9.6-alpine"
+    container_name: adn-postgres
     volumes:
-      - search-engine-data:/var/lib/postgresql/data
+      - adn-data:/var/lib/postgresql/data
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_DB=search-engine_db
-      - POSTGRES_USER=search-engine_user
-      - POSTGRES_PASSWORD=search-engine_password
-      
-  search-engine-app:
-    build: ./search-engine-app
-    container_name: search-engine-app
-    environment:
-      - DB_SERVER=search-engine-postgres
-      - POSTGRES_DB=search-engine_db
-      - POSTGRES_USER=search-engine_user
-      - POSTGRES_PASSWORD=search-engine_password
-    ports:
-      - 56789:56789
-    depends_on:
-      - "search-engine-postgres"
-    links:
-      - search-engine-postgres
+      - POSTGRES_DB=adn_db
+      - POSTGRES_USER=adn_user
+      - POSTGRES_PASSWORD=adn_password
 
+  adn-app:
+    build: ./adn-app
+    container_name: adn-app
+    environment:
+      - DB_SERVER=adn-postgres
+      - POSTGRES_DB=adn_db
+      - POSTGRES_USER=adn_user
+      - POSTGRES_PASSWORD=adn_password
+    ports:
+      - 8080:56790
+    depends_on:
+      - "adn-postgres"
+    links:
+      - adn-postgres
 
 
 volumes:
-  search-engine-data:
+  adn-data:
