@@ -1,33 +1,11 @@
 version: '3'
 services:
 
-  adn-postgres:
-    image: "postgres:9.6-alpine"
-    container_name: adn-postgres
-    volumes:
-      - adn-data:/var/lib/postgresql/data
+  ai-api:
+    build: ./ai-api
+    container_name: ai-api
     ports:
-      - 5432:5432
-    environment:
-      - POSTGRES_DB=adn_db
-      - POSTGRES_USER=adn_user
-      - POSTGRES_PASSWORD=adn_password
-
-  adn-app:
-    build: ./adn-app
-    container_name: adn-app
-    environment:
-      - DB_SERVER=adn-postgres
-      - POSTGRES_DB=adn_db
-      - POSTGRES_USER=adn_user
-      - POSTGRES_PASSWORD=adn_password
-    ports:
-      - 8080:56790
-    depends_on:
-      - "adn-postgres"
-    links:
-      - adn-postgres
-
+      - 56792:8080
 
 volumes:
   adn-data:

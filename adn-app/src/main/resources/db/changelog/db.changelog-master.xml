@@ -42,5 +42,14 @@
         <comment>Insert status column to result_description table</comment>
     </changeSet>
 
+    <changeSet id="5" author="Wojtek">
+        <sqlFile path="05_test_table_articles.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+
+        <comment>Insert status column to result_description table 2</comment>
+    </changeSet>
+
 </databaseChangeLog>
 
