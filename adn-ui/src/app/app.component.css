@@ -1,0 +1,31 @@
+.box {
+    border: 1px solid #ccc; /* Borde del cuadro */
+    border-radius: 5px; /* Bordes redondeados */
+    overflow: hidden; /* Para que los elementos internos no se desborden */
+    display: flex; /* Para usar flexbox y dividir el cuadro en dos partes */
+  }
+  
+  .left-section,
+  .right-section {
+    width: 50%; /* Cada sección ocupa la mitad del cuadro */
+    padding: 10px; /* Espaciado interno */
+    box-sizing: border-box; /* El padding no aumenta el tamaño total */
+  }
+  
+  .left-section {
+    background-color: #f0f0f0; /* Color de fondo de la sección izquierda */
+  }
+  
+  .right-section {
+    background-color: #e0e0e0; /* Color de fondo de la sección derecha */
+  }
+  
+  ul {
+    list-style-type: none; /* Quita los puntos de la lista */
+    padding: 0; /* Elimina el espacio interno de la lista */
+  }
+  
+  li {
+    margin-bottom: 10px; /* Espacio entre elementos de la lista */
+  }
+  

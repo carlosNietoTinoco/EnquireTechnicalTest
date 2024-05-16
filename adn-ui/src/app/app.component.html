@@ -3,7 +3,7 @@
   </div>
   <div class="col-md-8 ml-4">
     <a class="navbar-brand " href="#">
-      Prueba tecnica Carvajal
+      Technical Test Enquire
     </a>
   </div>
 
@@ -17,43 +17,31 @@
         <div class="card mt-4">
           <div class="card-body">
             <div class="card-title">
-              <h3>Inserte el dna ha verificar</h3>
+              <h3>Insert the text you want to search for among the articles</h3>
             </div>
             <div class="form-group">
-              <input type="text" id="dna" [(ngModel)]="dnaString" placeholder="Inserte dna">
+              <input type="text" id="dna" [(ngModel)]="dnaString" placeholder="Insert text">
             </div>
             <button (click)="enviarAdn()"  class="btn btn-primary mt-2">
-              Validar dna
+              Search
             </button>
             <div class="mt-2">
-              <h6>{{"El adn contiene mal formaciones:   " + resultado}}</h6>
+              <div class="box">
+                <div class="left-section">
+                  <h3>Search result: </h3>
+                  <h6>{{ resultado.answer }}</h6>
+                </div>
+                <div class="right-section">
+                  <ul>
+                    <h3>Matches found in the articles: </h3>
+                    <li *ngFor="let source of resultado.sources">
+                      <h6>Page Content: {{ source.pageContent }}</h6>
+                      <p>Source: {{ source.source }}</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="card-body">
-            <div class="card-title">
-              <h3>Estadisticas</h3>
-            </div>
-            <div class="form-group mt-2">
-              <h3>"count_correct_dna":{{estadisticasGet.count_correct_dna}},"count_defect_dna":{{estadisticasGet.count_defect_dna}},"ratio":{{estadisticasGet.ratio}}</h3>
-            </div>
-            <button (click)="getEstadisticas()"  class="btn btn-primary mt-2">
-              Obtener estadisticas
-            </button>
-
-          </div>
-          <div class="card-body">
-            <div class="card-title">
-              <h3>Registro de todas las validaciones</h3>
-            </div>
-            <button (click)="getAll()"  class="btn btn-primary mt-2">
-              Obtener registro
-            </button>
-            <li
-              *ngFor="let prueba of allPruebas"
-              class="list-group-item list-group-item-action"
-            >
-              <span class="badge badge-primary"></span> {{prueba.id}} - {{ prueba.dna }}}
-            </li>
           </div>
 
         </div>

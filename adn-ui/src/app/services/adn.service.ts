@@ -36,8 +36,11 @@ export class AdnService {
   }
 
   enviarAdn(adn: Adn) {
-    const path = `http://localhost:8080/api/adn/procesar`;
-    return this.http.post(path,  adn, {
+    const path = `http://localhost:56791/api/v1/articles-ai/search`;
+    const queryObject = {
+      query: adn.dna.join('')
+    };
+    return this.http.post(path,  queryObject, {
       headers: {'Content-Type':'application/json; charset=utf-8',
         'access_control_allow_origin':'*',
         'access_control_allow_headers' : 'origin, content-type, accept',

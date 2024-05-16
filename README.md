@@ -1,56 +1,73 @@
-## Aplicacion ADN
+## Test Application
 
-Esta es una aplicación creada a partir de la especificación dada en la prueba técnica enviada por la empresa Carvajal.
+##Requirements:
 
-Para este proyecto se implementaron 2 versiones, una de ejecución local y una de ejecución contenerizada por medio de Docker. En este Readme se especificara la implementación contenerizada, para ver la implementación local vea la rama [local](https://github.com/carlosNietoTinoco/pruebaTecnica2021-adn/tree/local).
+To run this application, it's necessary to have Docker installed, version 19.03 or higher. You must have the following ports available:
 
-Es este Readme se especificara la forma de desplegar la aplicación que está compuesta por 3 contenedores Docker separados que contienen:
+56790
+56791
+56792
+56793
 
-- Base de datos PostgreSQL
-- Backend de Java (Spring Boot)
-- Interfaz Angular
+##Deployment Instructions:
 
-El punto de entrada para un usuario es un sitio web que está disponible en la dirección: **http://localhost:4200/**
+Unzip the EnquireTechnicalTest.zip file. Enter the generated folder and open a terminal located in that folder. Execute the following command:
 
-![ADN](https://github.com/carlosNietoTinoco/pruebaTecnica2021-adn/blob/master/assets/adn-ui.png)
+docker compose up
 
+This command will execute all the necessary software components for the project. On my computer, it took around 10 minutes. I apologize for its length, partly due to downloading Phi-3, which weighs 2.3 GB.
 
----
+When all the necessary software has finished running, you'll see the following outputs on the screen:
 
-### Requisitos previos
+Last 2 lines of the ai-api container:
 
-Para ejecutar esta aplicación, debe instalar dos herramientas: **Docker** y **Docker Compose**.
+ai-api | * Debugger is active!
+ai-api | * Debugger PIN: 317-285-571
 
-Instrucciones de cómo instalar **Docker** en [Ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu/), [Windows](https://docs.docker.com/docker-for-windows/install/), [Mac](https://docs.docker.com/docker-for-mac/install/).
+Last 5 lines of the adn-app container:
 
----
-
-### ¿Cómo ejecutarlo?
-
-Toda la aplicación se puede ejecutar con un solo comando en una terminal abierta en la localización de este proyecto:
-
-```
-$ docker-compose up
-```
-
-En caso que adn-app presente un error de conexión, salga de la ejecución con ctrl+c y vuelva a ejecutar **docker-compose up**, esto se da cuando la aplicación Java esta lista antes que la instancia de PostgreSQL, no se realizo la configuración de espera ya que esto suele ser tratado en el cluster de desligue, como ya se han generado los contenedores este proceso es muy rápido.
+adn-app | 2024-05-16 04:08:54.852 INFO 1 --- [ main] o.s.s.concurrent.ThreadPoolTaskExecutor : Initializing ExecutorService 'applicationTaskExecutor'
+adn-app | 2024-05-16 04:08:54.904 WARN 1 --- [ main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+adn-app | 2024-05-16 04:08:55.178 INFO 1 --- [ main] o.s.b.a.e.web.EndpointLinksResolver : Exposing 2 endpoint(s) beneath base path '/actuator'
+adn-app | 2024-05-16 04:08:55.233 INFO 1 --- [ main] o.s.b.w.embedded.tomcat.TomcatWebServer : Tomcat started on port(s): 8080 (http) with context path '/api/v1'
+adn-app | 2024-05-16 04:08:55.235 INFO 1 --- [ main] com.carvajal.adn.AdnApplication : Started AdnApplication in 6.39
 
 
-Después de esto ya podrá hacer una prueba completa de la aplicación desde cualquier navegador ingresando a **http://localhost:4200/**, tambien puede realizar peticiones al backend de la aplicación, para esto puede usar la colección de postman que se encuentra [aqui](https://github.com/carlosNietoTinoco/pruebaTecnica2021-adn/blob/docker/assets/API-REST%20Prueba%20tecnica.postman_collection.json), para esto por favor tenga en cuenta las siguientes aclaraciones:
 
-- La secuencia de ADN a analizar debe cumplir con el formato especificado en la prueba técnica, esto es; comience y finalice con corchetes, divida las filas con comas, no deje espacios en blanco entre las palabras, cada fila de palabras debe abrir y cerrar con comillas. A continuación puede ver un ejemplo:
+At this point, you can go to:
 
-```
-{"ACTCTATC","CATCTTTC","ATATCTTT","GGCAGTGG","TATCAGGG","TTTTGAGG","GAATGGAC","TGGTTGCT"}
-```
+http://localhost:56793/
 
-- Dado la especificación mostrada en la prueba técnica, para las estadísticas se asumió que la variable **ratio** indica la cantidad de ADN correctos por ADN con mal formaciones; (correctos/defectuosos), por lo cual si la cantidad de secuencias con mal formaciones es cero, este ratio tendrá un valor de cero.
+The result consists of 2 parts. The first one displays the AI's text response, and the second one shows the matches found.
 
----
+There you'll find a text entry, where you can input a fragment from any of the following articles. In approximately 1 minute and 20 seconds, the program will indicate the search result below the text box.
 
-#### Notas
 
-Creo que a nivel algorítmico, la clase mas interesante es [GraphService.java](https://github.com/carlosNietoTinoco/pruebaTecnica2021-adn/blob/docker/adn-app/src/main/java/com/carvajal/adn/service/GraphService.java). En esta clase se implementa la búsqueda de la malformación en la matriz, por medio del método **contieneMalformacionesGeneticas**. Esta búsqueda se hace con una representación de grafos, usando una búsqueda por profundidad limitada iterativa, se puede ver mas sobre este algoritmo en; [Iterative_deepening_depth-first_search](https://en.wikipedia.org/wiki/Iterative_deepening_depth-first_search).
+https://repositorio.iiap.gob.pe/handle/20.500.12921/749
+https://repositorio.iiap.gob.pe/handle/20.500.12921/748
+https://repositorio.iiap.gob.pe/handle/20.500.12921/746
+https://repositorio.iiap.gob.pe/handle/20.500.12921/745
+https://repositorio.iiap.gob.pe/handle/20.500.12921/744
+https://repositorio.iiap.gob.pe/handle/20.500.12921/743
+https://repositorio.iiap.gob.pe/handle/20.500.12921/742
+https://repositorio.iiap.gob.pe/handle/20.500.12921/741
+https://repositorio.iiap.gob.pe/handle/20.500.12921/740
+https://repositorio.iiap.gob.pe/handle/20.500.12921/737
+https://repositorio.iiap.gob.pe/handle/20.500.12921/736
+https://repositorio.iiap.gob.pe/handle/20.500.12921/735
+https://repositorio.iiap.gob.pe/handle/20.500.12921/733
+https://repositorio.iiap.gob.pe/handle/20.500.12921/731
+https://repositorio.iiap.gob.pe/handle/20.500.12921/730
+https://repositorio.iiap.gob.pe/handle/20.500.12921/729
+https://repositorio.iiap.gob.pe/handle/20.500.12921/722
+https://repositorio.iiap.gob.pe/handle/20.500.12921/721
+https://repositorio.iiap.gob.pe/handle/20.500.12921/720
+https://repositorio.iiap.gob.pe/handle/20.500.12921/719
 
-Algo muy interesante de esta implementación es que es de orden **O (b ^ d)**, donde **b** es el factor de ramificación y **d** es la profundidad de la meta, esto hace que para el caso en particular donde la profundidad es de 3 (profundidad máxima de exploración en el grafo), este algoritmo tenga un orden lineal, aunque en el peor de los casos este podría acercarse (sin llegar) a un orden **O (n ^ 2)**, que seria cuando el ADN este distribuido siempre en conexiones no lineales de exactamente 4 bases nitrogenadas.
+
+
+
+
+
+
 

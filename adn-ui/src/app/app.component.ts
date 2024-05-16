@@ -5,6 +5,13 @@ import {Adn} from "./interfaces/adn";
 import {Estadisticas} from "./interfaces/estadisticas";
 import {Pruebas} from "./interfaces/pruebas";
 
+
+interface Respuesta {
+  code: string;
+  message: string;
+}
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -39,7 +46,7 @@ export class AppComponent {
   }
 
   dnaString = "" ;
-  resultado: Object = "";
+  resultado: { code: string; message: string; } | any;
 
 
   enviarAdn() {
